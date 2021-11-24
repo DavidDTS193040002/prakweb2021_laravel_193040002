@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostsController;
+use GuzzleHttp\Middleware;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -61,5 +62,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 
+Route::get('/dashboard/posts/checkSlug', [DashboardPostsController::class, 'checkSlug'])
+    ->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostsController::class)
     ->middleware('auth');
